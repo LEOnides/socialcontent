@@ -50,6 +50,20 @@ git commit -m "Agrega post de LinkedIn sobre liderazgo sin autoridad"
 git push
 ```
 
+## Brand Studio
+
+App web estática de Design Leaders en [`apps/brand-studio/`](apps/brand-studio/): vistas **Plantillas · Editor · Biblioteca · Discurso**. Logos, ilustraciones, fuentes y html2canvas van versionados en esa carpeta (offline-first).
+
+```bash
+cd apps/brand-studio
+npm install
+npm run dev       # http://127.0.0.1:5173/
+npm run build     # genera dist/ para hosting estático
+npm run preview   # sirve dist/
+```
+
+Cómo agregar una plantilla o un asset, y las reglas de marca que no se tocan: [`apps/brand-studio/README.md`](apps/brand-studio/README.md).
+
 ## Notas
 
 - Repo **privado**: aquí van borradores y notas de trabajo, no material final para terceros.

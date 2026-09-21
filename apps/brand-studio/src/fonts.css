@@ -1,0 +1,64 @@
+/* Design Leaders · local fonts (offline-first).
+   Dev: /fonts/… from public/. Build: vite.config rewrites these to ../fonts/
+   relative to dist/assets/*.css so a static host can live on any path. */
+@font-face {
+  font-family: "Fira Sans";
+  font-style: normal;
+  font-weight: 300;
+  font-display: swap;
+  src: url("/fonts/fira-sans-300.woff") format("woff"),
+       url("/fonts/FiraSans-300.ttf") format("truetype");
+}
+@font-face {
+  font-family: "Fira Sans";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("/fonts/fira-sans-400.woff") format("woff"),
+       url("/fonts/FiraSans-400.ttf") format("truetype");
+}
+@font-face {
+  font-family: "Fira Sans";
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url("/fonts/fira-sans-400.woff") format("woff"),
+       url("/fonts/FiraSans-Regular.ttf") format("truetype");
+}
+@font-face {
+  font-family: "Fira Sans";
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("/fonts/fira-sans-700.woff") format("woff"),
+       url("/fonts/FiraSans-700.ttf") format("truetype");
+}
+@font-face {
+  font-family: "Fira Sans";
+  font-style: normal;
+  font-weight: 900;
+  font-display: swap;
+  src: url("/fonts/fira-sans-900.woff") format("woff"),
+       url("/fonts/FiraSans-900.ttf") format("truetype");
+}
+@font-face {
+  font-family: "JetBrains Mono";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("/fonts/JetBrainsMono-Regular.woff2") format("woff2");
+}
+@font-face {
+  font-family: "JetBrains Mono";
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url("/fonts/JetBrainsMono-Medium.woff2") format("woff2");
+}
+@font-face {
+  font-family: "JetBrains Mono";
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("/fonts/JetBrainsMono-Bold.woff2") format("woff2");
+}

@@ -1,0 +1,15 @@
+{
+  "name": "dl-brand-studio",
+  "private": true,
+  "version": "0.1.0",
+  "description": "Design Leaders Brand Studio — app estática (Vite + vanilla)",
+  "type": "module",
+  "scripts": {
+    "dev": "vite --host 127.0.0.1 --port 5173",
+    "build": "vite build",
+    "preview": "vite preview --host 127.0.0.1 --port 4173"
+  },
+  "devDependencies": {
+    "vite": "^6.3.5"
+  }
+}
