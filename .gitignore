@@ -1,0 +1,39 @@
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+Icon?
+._*
+
+# Editores
+.vscode/
+.idea/
+*.swp
+
+# Entorno y secretos
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+
+# Dependencias y builds
+node_modules/
+dist/
+build/
+__pycache__/
+*.pyc
+.venv/
+
+# Media pesada (usar almacenamiento externo)
+*.mp4
+*.mov
+*.avi
+*.mkv
+*.zip
+*.psd
+*.aep
+
+# Temporales
+tmp/
+*.log

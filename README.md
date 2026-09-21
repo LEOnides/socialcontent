@@ -1,0 +1,56 @@
+# socialcontent
+
+Repositorio de trabajo para el contenido social: guiones, posts, carruseles y el calendario editorial.
+
+> Primer commit para habilitar el repo. La estructura de abajo es una propuesta de arranque — ajústala conforme el flujo real lo pida.
+
+## Estructura propuesta
+
+```
+.
+├── calendario/        # plan editorial por semana o mes
+├── drafts/            # piezas en proceso
+├── publicado/         # piezas ya publicadas, con fecha y canal
+├── assets/            # imágenes, portadas, recursos gráficos ligeros
+└── docs/              # voz y tono, guías de marca, plantillas
+```
+
+## Convenciones
+
+**Nombres de archivo:** `YYYY-MM-DD-canal-tema.md`
+
+```
+2026-09-21-linkedin-liderazgo-sin-autoridad.md
+2026-09-24-instagram-carrusel-feedback.md
+```
+
+**Frontmatter sugerido** al inicio de cada pieza:
+
+```yaml
+---
+titulo: Liderazgo sin autoridad
+canal: linkedin        # linkedin | instagram | youtube | newsletter
+formato: post          # post | carrusel | reel | guion | newsletter
+estado: draft          # idea | draft | revision | listo | publicado
+fecha_objetivo: 2026-09-21
+---
+```
+
+**Flujo:** `idea` → `draft` → `revision` → `listo` → `publicado`
+
+Cuando una pieza se publica, se mueve a `publicado/` y su `estado` cambia a `publicado`.
+
+## Trabajo diario
+
+```bash
+git pull
+# editar o crear piezas
+git add .
+git commit -m "Agrega post de LinkedIn sobre liderazgo sin autoridad"
+git push
+```
+
+## Notas
+
+- Repo **privado**: aquí van borradores y notas de trabajo, no material final para terceros.
+- Los archivos pesados (video en bruto, exports grandes) no van al repo — se quedan en almacenamiento externo y aquí solo se referencian por enlace.
