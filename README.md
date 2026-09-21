@@ -64,9 +64,9 @@ npm run preview   # sirve dist/
 
 Cómo agregar una plantilla o un asset, y las reglas de marca que no se tocan: [`apps/brand-studio/README.md`](apps/brand-studio/README.md).
 
-URL pública, después de mergear y activar Pages (Source: GitHub Actions): `https://leonides.github.io/socialcontent/`. El workflow publica solo el `dist/` del Studio.
+URL prevista: `https://leonides.github.io/socialcontent/`. Hoy responde 404. El workflow publica solo el `dist/` del Studio. Para dejarlo público: marcar el PR como listo, mergear a `main` y, en **Settings → Pages**, elegir **Source: GitHub Actions**. En GitHub Pro el sitio puede ser público con el repo privado. En GitHub Free hay que pasar el repo a público en **Settings → General → Danger Zone → Change repository visibility**; eso publica también el código (borradores). El detalle está en [`apps/brand-studio/README.md`](apps/brand-studio/README.md).
 
 ## Notas
 
-- Repo **privado**: aquí van borradores y notas de trabajo, no material final para terceros.
+- El repo sigue **privado** hasta que se cambie la visibilidad a mano. Aquí van borradores y notas de trabajo, no material final para terceros.
 - Los archivos pesados (video en bruto, exports grandes) no van al repo — se quedan en almacenamiento externo y aquí solo se referencian por enlace.

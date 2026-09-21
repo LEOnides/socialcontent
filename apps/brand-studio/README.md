@@ -39,17 +39,15 @@ El sitio queda en:
 
 `https://leonides.github.io/socialcontent/`
 
-Solo se publica el `dist/` del Studio. Los borradores de `socialcontent` no salen al sitio.
+Hoy **no está en línea**: esa URL responde HTTP 404 y el repo sigue privado. El workflow publica solo `apps/brand-studio/dist`. Los borradores editoriales no entran a ese artifact.
 
-Este repo es **privado**. GitHub Pages en un repo privado pide un plan que lo permita (Pro o superior). En GitHub Free, Pages solo existe en repos públicos: no hagas público este repo para “prender” el sitio, porque ahí viven borradores. En Free, el camino es un repo público aparte que contenga únicamente el Studio.
+El token de la integración no puede cambiar la visibilidad ni activar Pages (la API responde 403). Hacen falta estos clics, en este orden:
 
-Para dejarlo en línea después de mergear este cambio a `main`:
-
-1. En el repo: **Settings → Pages → Build and deployment → Source: GitHub Actions**.
-2. El workflow `.github/workflows/brand-studio-pages.yml` corre en cada push a `main` que toque `apps/brand-studio/`. También se puede lanzar a mano con **Actions → Brand Studio Pages → Run workflow**.
-3. Cuando el job `deploy` termina, la URL de arriba sirve el Studio.
-
-Desde esta sesión no se puede activar Pages: el token no tiene permiso de configuración del repo.
+1. El PR está en borrador. En https://github.com/LEOnides/socialcontent/pull/1, **Ready for review** y después **Merge pull request** hacia `main`. El workflow solo corre con un push a `main`.
+2. Camino que deja el código privado y el sitio público, si la cuenta es GitHub Pro o superior: **Settings → Pages → Build and deployment → Source: GitHub Actions**. En ese plan, un sitio publicado desde un repo privado es público en internet. Si aparece **GitHub Pages visibility**, elegí **Public**.
+3. Si Pages dice que el repositorio tiene que ser público (GitHub Free): el **código fuente** también queda público, borradores incluidos. **Settings → General → Danger Zone → Change repository visibility → Public**, confirmá el nombre del repo, **I have read and understand these effects** y **Make this repository public**. Después el paso 2.
+4. Si el workflow no arrancó solo: **Actions → Brand Studio Pages → Run workflow**, rama `main`.
+5. Cuando el job `deploy` termina, abrí `https://leonides.github.io/socialcontent/`.
 
 ## Qué está versionado
 
