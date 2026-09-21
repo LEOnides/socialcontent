@@ -33,6 +33,24 @@ npm run preview
 
 `dist/` y `node_modules/` no se commitean.
 
+## URL pública (GitHub Pages)
+
+El sitio queda en:
+
+`https://leonides.github.io/socialcontent/`
+
+Solo se publica el `dist/` del Studio. Los borradores de `socialcontent` no salen al sitio.
+
+Este repo es **privado**. GitHub Pages en un repo privado pide un plan que lo permita (Pro o superior). En GitHub Free, Pages solo existe en repos públicos: no hagas público este repo para “prender” el sitio, porque ahí viven borradores. En Free, el camino es un repo público aparte que contenga únicamente el Studio.
+
+Para dejarlo en línea después de mergear este cambio a `main`:
+
+1. En el repo: **Settings → Pages → Build and deployment → Source: GitHub Actions**.
+2. El workflow `.github/workflows/brand-studio-pages.yml` corre en cada push a `main` que toque `apps/brand-studio/`. También se puede lanzar a mano con **Actions → Brand Studio Pages → Run workflow**.
+3. Cuando el job `deploy` termina, la URL de arriba sirve el Studio.
+
+Desde esta sesión no se puede activar Pages: el token no tiene permiso de configuración del repo.
+
 ## Qué está versionado
 
 ```

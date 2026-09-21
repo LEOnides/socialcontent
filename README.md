@@ -64,6 +64,8 @@ npm run preview   # sirve dist/
 
 Cómo agregar una plantilla o un asset, y las reglas de marca que no se tocan: [`apps/brand-studio/README.md`](apps/brand-studio/README.md).
 
+URL pública, después de mergear y activar Pages (Source: GitHub Actions): `https://leonides.github.io/socialcontent/`. El workflow publica solo el `dist/` del Studio.
+
 ## Notas
 
 - Repo **privado**: aquí van borradores y notas de trabajo, no material final para terceros.
