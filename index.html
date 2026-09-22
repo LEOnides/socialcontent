@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="light">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Design Leaders · Brand Studio · Woven Systems</title>
+<script src="./vendor/html2canvas.min.js" defer></script>
+  <script type="module" crossorigin src="./assets/index-DWqgFbSx.js"></script>
+  <link rel="stylesheet" crossorigin href="./assets/index-DduO5AJG.css">
+</head>
+<body>
+<div class="app">
+  <nav class="nav" aria-label="Módulos">
+    <a class="nav-brand" href="#" id="brandHome" title="Design Leaders">
+      <img class="mark" src="./assets/logos/dl-mark-white-sm.png" alt="DL"/>
+    </a>
+    <button class="nav-btn active" data-view="plantillas" title="Plantillas">
+      <svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+      <span class="nav-label">Plantillas</span>
+    </button>
+    <button class="nav-btn" data-view="editor" title="Editor">
+      <svg viewBox="0 0 24 24"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg>
+      <span class="nav-label">Editor</span>
+    </button>
+    <button class="nav-btn" data-view="biblioteca" title="Biblioteca">
+      <svg viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+      <span class="nav-label">Biblioteca</span>
+    </button>
+    <button class="nav-btn" data-view="discurso" title="Discurso">
+      <svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+      <span class="nav-label">Discurso</span>
+    </button>
+    <div class="nav-spacer"></div>
+  </nav>
+
+  <div class="main">
+    <header class="topbar">
+      <div class="wm"><span class="b">design</span> leaders <span class="wm-sub">Woven Systems</span></div>
+      <span class="crumb mono" id="crumb">PLANTILLAS</span>
+      <button type="button" class="tbtn" id="btnTheme" title="Tema UI">Tema</button>
+      <button type="button" class="tbtn" id="btnPresent" title="Pantalla completa">Presentar</button>
+    </header>
+
+    <div class="stage">
+      <!-- PLANTILLAS -->
+      <section class="view active" id="view-plantillas">
+        <h1 class="hero-line">Liderar también se <span class="r">diseña</span>.</h1>
+        <p class="hero-sub">Plantillas charcoal · Woven · cream · light wash + capa <strong>Sketchnote DL</strong> (3 modos canónicos: quote-lineart · whiteboard dark · field-rojo). Light whiteboard = archivo/ref histórica; no usar para trabajo nuevo. Tipo UI ≥16px · IG body ≥28 · títulos ~56–72. Mark limpio (sin recuadro). Copy yapping LATAM.</p>
+        <div class="pill-row">
+          <span class="pill red">Extensión de UserFirst</span>
+          <span class="pill purple">No réplica</span>
+          <span class="pill tan">Liderazgo práctico LATAM</span>
+        </div>
+
+        <div class="section-label">Redes</div>
+        <div class="gallery" id="gal-redes"></div>
+        <div class="section-label">Quote / manifiesto</div>
+        <div class="gallery" id="gal-quote"></div>
+        <div class="section-label">Woven gradient</div>
+        <div class="gallery" id="gal-woven"></div>
+        <div class="section-label">Táctico</div>
+        <div class="gallery" id="gal-tactico"></div>
+        <div class="section-label">Deck / one-pager</div>
+        <div class="gallery" id="gal-deck"></div>
+        <div class="section-label">Light wash · host ilustración</div>
+        <div class="gallery" id="gal-wash"></div>
+        <div class="section-label">Ilustración · Sketchnote DL</div>
+        <div class="gallery" id="gal-illo"></div>
+      </section>
+
+      <!-- EDITOR -->
+      <section class="view" id="view-editor">
+        <div class="editor-empty" id="editorEmpty">
+          <p class="section-label">Editor</p>
+          <h2>Elegí una plantilla</h2>
+          <p>El lienzo, los campos y el validador quedan vacíos hasta que abras una pieza. En Plantillas elegís el formato; acá editás, validás y exportás.</p>
+          <button type="button" class="tbtn primary" id="btnEmptyPick">Elegí una plantilla</button>
+        </div>
+        <div id="editorWorkspace" hidden>
+        <div class="toolbar">
+          <button type="button" class="tbtn" id="btnBack">← Plantillas</button>
+          <strong id="edTitle" style="margin-right:auto">Editor</strong>
+          <button type="button" class="tbtn" id="btnZoomOut">A−</button>
+          <span class="zoom-lab" id="zoomLab">42%</span>
+          <button type="button" class="tbtn" id="btnZoomIn">A+</button>
+          <button type="button" class="tbtn" id="btnFontDown">Tipo −</button>
+          <button type="button" class="tbtn" id="btnFontUp">Tipo +</button>
+          <button type="button" class="tbtn" id="btnPieceTheme">Tema pieza</button>
+          <button type="button" class="tbtn" id="btnPrint">Imprimir / PDF</button>
+          <button type="button" class="tbtn primary" id="btnPng">Export PNG</button>
+        </div>
+        <div class="editor-layout">
+          <div class="canvas-wrap">
+            <div class="canvas-sizer" id="canvasSizer">
+              <div class="canvas-frame" id="canvasFrame" data-piece="dark">
+                <div id="canvasInner"></div>
+              </div>
+            </div>
+          </div>
+          <aside class="panel">
+            <h3>Campos</h3>
+            <div id="fields"></div>
+            <h3 style="margin-top:18px">Validador</h3>
+            <ul class="val-list" id="validator"></ul>
+          </aside>
+        </div>
+        </div>
+      </section>
+
+      <!-- BIBLIOTECA -->
+      <section class="view" id="view-biblioteca">
+        <h1 class="hero-line">Biblioteca de marca</h1>
+        <p class="hero-sub">Fuente de verdad: narrativa Design Leaders LATAM + Woven Systems. Misma filosofía que UserFirst, otra capa de valor.</p>
+        <div class="pill-row">
+          <span class="pill red">Conocimiento</span>
+          <span class="pill purple">Práctica</span>
+          <span class="pill tan">Acompañamiento</span>
+        </div>
+
+        <div class="bib-grid">
+
+          <div class="bib-card" id="bib-sketchnote-dl" style="grid-column:1/-1">
+            <h3>Ilustración · Sketchnote DL</h3>
+            <p style="margin:0 0 12px">Línea blanca / visual thinking de LEO. <strong>Tres modos canónicos:</strong> quote + lineart · whiteboard sketchnote dark · field rojo. Light-wash <em>host</em> illos; charcoal y field-rojo son <em>campos</em>. Sin fotorealismo · sin fills pesados · rojo escaso (salvo field-rojo) · mark sin recuadro gradient.</p>
+            <div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px">
+              <div style="text-align:center">
+                <img src="./assets/illustrations/quote-lineart-autoridad.jpg" alt="Quote + lineart" style="width:100%;border-radius:8px;aspect-ratio:1;object-fit:cover"/>
+                <div class="mono muted" style="font-size:16px;margin-top:6px">Quote + lineart · charcoal</div>
+              </div>
+              <div style="text-align:center">
+                <img src="./assets/illustrations/sketchnote-compitas.jpg" alt="Whiteboard sketchnote dark" style="width:100%;border-radius:8px;aspect-ratio:1;object-fit:cover"/>
+                <div class="mono muted" style="font-size:16px;margin-top:6px">Whiteboard dark · chalk blanca</div>
+              </div>
+              <div style="text-align:center">
+                <img src="./assets/illustrations/field-rojo-roadmap.jpg" alt="Field rojo" style="width:100%;border-radius:8px;aspect-ratio:1;object-fit:cover"/>
+                <div class="mono muted" style="font-size:16px;margin-top:6px">Field rojo · campaign</div>
+              </div>
+            </div>
+            <div style="display:flex;gap:12px;align-items:center;margin-top:14px;opacity:.48;filter:grayscale(1)">
+              <img src="./assets/illustrations/sketchnote-light-compliance-ux.jpg" alt="Light whiteboard · archivo histórico" style="width:92px;height:92px;border-radius:8px;object-fit:cover"/>
+              <div><strong>Archivo/ref histórica · Light whiteboard</strong><br/><span class="mono muted" style="font-size:16px">No canónica · no usar para trabajo nuevo. JPG conservado en <code>/assets/illustrations/</code>.</span></div>
+            </div>
+            <p class="mono muted" style="font-size:16px;margin-top:12px">Plantillas canónicas: <code>illo-quote-lineart</code> · <code>illo-sketchnote</code> · <code>illo-field-rojo</code> · refs en <code>/assets/illustrations/</code></p>
+          </div>
+
+          <div class="bib-card" style="grid-column:1/-1">
+            <h3>Sistema de logo · Woven Systems</h3>
+            <p class="mono muted" style="font-size:16px;margin:0 0 14px">Reglas LEO: <strong>nunca</strong> monograma dentro de recuadro/badge gradient. Small → black sm. Large → woven black/gradient solo. Lockup → “Design Leaders” (+ LATAM).</p>
+            <div class="logo-system" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:16px;align-items:end">
+              <div style="text-align:center">
+                <div style="height:100px;display:flex;align-items:center;justify-content:center;background:#F7F4EF;border-radius:8px;border:1px solid rgba(20,20,20,.1);padding:12px">
+                  <img src="./assets/logos/dl-mark-black-lg.png" alt="black lg" style="max-height:72px;max-width:100%;object-fit:contain"/>
+                </div>
+                <div class="mono muted" style="font-size:16px;margin-top:6px">BLACK LG · large</div>
+              </div>
+              <div style="text-align:center">
+                <div style="height:100px;display:flex;align-items:center;justify-content:center;background:#F7F4EF;border-radius:8px;border:1px solid rgba(20,20,20,.1);padding:12px">
+                  <img src="./assets/logos/dl-mark-black-sm.png" alt="black sm" style="max-height:48px;max-width:100%;object-fit:contain"/>
+                </div>
+                <div class="mono muted" style="font-size:16px;margin-top:6px">BLACK SM · nav / UI</div>
+              </div>
+              <div style="text-align:center">
+                <div style="height:100px;display:flex;align-items:center;justify-content:center;background:#F7F4EF;border-radius:8px;border:1px solid rgba(20,20,20,.1);padding:12px">
+                  <img src="./assets/logos/dl-mark-gradient.png" alt="gradient" style="max-height:72px;max-width:100%;object-fit:contain"/>
+                </div>
+                <div class="mono muted" style="font-size:16px;margin-top:6px">GRADIENT · solo, sin caja</div>
+              </div>
+              <div style="text-align:center">
+                <div style="height:100px;display:flex;align-items:center;justify-content:center;background:#0D0F10;border-radius:8px;padding:12px">
+                  <img src="./assets/logos/dl-mark-white-sm.png" alt="white sm" style="max-height:48px;max-width:100%;object-fit:contain"/>
+                </div>
+                <div class="mono muted" style="font-size:16px;margin-top:6px">WHITE SM · dark UI</div>
+              </div>
+              <div style="text-align:center;grid-column:span 2">
+                <div style="height:100px;display:flex;align-items:center;justify-content:center;background:#F7F4EF;border-radius:8px;border:1px solid rgba(20,20,20,.1);padding:12px">
+                  <img src="./assets/logos/dl-lockup-h-light.png" alt="lockup light" style="max-height:56px;max-width:100%;object-fit:contain"/>
+                </div>
+                <div class="mono muted" style="font-size:16px;margin-top:6px">LOCKUP H · light</div>
+              </div>
+              <div style="text-align:center;grid-column:span 2">
+                <div style="height:100px;display:flex;align-items:center;justify-content:center;background:#181A1F;border-radius:8px;padding:12px">
+                  <img src="./assets/logos/dl-lockup-h-dark.png" alt="lockup dark" style="max-height:56px;max-width:100%;object-fit:contain"/>
+                </div>
+                <div class="mono muted" style="font-size:16px;margin-top:6px">LOCKUP H · dark</div>
+              </div>
+              <div style="text-align:center;grid-column:span 2">
+                <div style="height:140px;display:flex;align-items:center;justify-content:center;background:#F7F4EF;border-radius:8px;border:1px solid rgba(20,20,20,.1);padding:12px">
+                  <img src="./assets/logos/dl-lockup-stacked.png" alt="stacked" style="max-height:120px;max-width:100%;object-fit:contain"/>
+                </div>
+                <div class="mono muted" style="font-size:16px;margin-top:6px">LOCKUP STACKED</div>
+              </div>
+              <div style="text-align:center;grid-column:1/-1">
+                <div style="height:120px;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#5B2C8A 0%,#C2185B 45%,#FF0033 100%);border-radius:8px;padding:16px">
+                  <img src="./assets/logos/dl-mark-white-lg.png" alt="white on woven full-bleed" style="max-height:88px;max-width:40%;object-fit:contain"/>
+                </div>
+                <div class="mono muted" style="font-size:16px;margin-top:6px">WOVEN FULL-BLEED · white line mark (campo = gradiente; mark sin recuadro anidado)</div>
+              </div>
+            </div>
+            <p style="margin-top:14px">El monograma DL entrelaza D + L con líneas paralelas (“woven”): el liderazgo conecta experiencia, conocimiento, comunidad, herramientas y acción — de <strong>hacer diseño</strong> a <strong>liderar a través del diseño</strong>.</p>
+            <p class="mono muted" style="font-size:16px;margin-top:10px">Assets en el repo: <code>public/assets/logos/</code> · dl-mark-black-lg/sm · dl-mark-gradient · dl-lockup-h-light/dark · dl-lockup-stacked</p>
+          
+            <h3>Narrativa esencial</h3>
+            <p><strong class="r" style="font-size:18px">Liderar también se diseña.</strong></p>
+            <p style="margin-top:10px"><strong>Shift:</strong> De diseñar soluciones a diseñar condiciones.</p>
+            <p style="margin-top:8px"><strong>Creencia:</strong> El liderazgo no comienza con un título. Comienza cuando creas condiciones para que otras personas, el producto y la organización avancen.</p>
+            <p style="margin-top:8px"><strong>Promesa:</strong> Herramientas, conversaciones y práctica para transformar experiencia de diseño en capacidad de liderazgo.</p>
+            <div class="pill-row" style="margin-top:14px">
+              <span class="pill red">Extensión de UserFirst</span>
+              <span class="pill purple">No réplica</span>
+            </div>
+            <p style="margin-top:4px">Misma filosofía. Otra capa: Producto / Servicio / Sistema → <strong>Personas / Equipos / Influencia</strong>.</p>
+          </div>
+
+          <div class="bib-card">
+            <h3>Territorio · pilares</h3>
+            <p>No escuela convencional. No comunidad genérica. No coaching aspiracional. Plataforma de práctica para liderar diseño en la complejidad real de LATAM.</p>
+            <div class="pillar"><span class="pill red">Conocimiento</span><span class="muted">Playbooks · podcast · herramientas</span></div>
+            <div class="pillar"><span class="pill purple">Práctica</span><span class="muted">Comunidad · workshops · conversaciones</span></div>
+            <div class="pillar"><span class="pill tan">Acompañamiento</span><span class="muted">Programas · mentoría · advisory</span></div>
+            <p style="margin-top:12px;font-weight:700;color:var(--accent)">PLATAFORMA DE LIDERAZGO PRÁCTICO</p>
+            <p>Construida desde LATAM para organizaciones reales.</p>
+          </div>
+
+          <div class="bib-card">
+            <h3>Paleta</h3>
+            <div class="swatches" id="swatches"></div>
+            <p class="mono muted" style="font-size:16px;margin-top:10px">Máx. 3 colores/pieza · una palabra/número en rojo · sin #000/#FFF puros · Woven saturado O light wash — nunca caja CTA roja</p>
+            <h4 style="margin:16px 0 8px;font-size:16px">Light wash (ilustración)</h4>
+            <div class="wash-swatches">
+              <div class="wash-swatch"><i style="background:linear-gradient(160deg,#E8E0F0,#F5E6EB,#FAF8F4)"></i><span>Lavender→blush</span></div>
+              <div class="wash-swatch"><i style="background:linear-gradient(155deg,#E5E8EB,#F5F0E8,#F2E4E6)"></i><span>Mist→cream→rose</span></div>
+              <div class="wash-swatch"><i style="background:linear-gradient(150deg,#EDE4F5,#F8E8EE,#FAFAFA)"></i><span>Violet→pink</span></div>
+              <div class="wash-swatch"><i style="background:linear-gradient(145deg,#F8E4DE,#F7F0E8,#FAF8F4)"></i><span>Coral airy</span></div>
+            </div>
+            <p class="mono muted" style="font-size:16px;margin-top:8px">Full-bleed o campo suave · zona vacía para arte · monograma limpio (sin cuadro) sobre wash</p>
+          </div>
+
+          <div class="bib-card">
+            <h3>Tipografía</h3>
+            <div class="type-row">
+              <div class="sample" style="font-weight:900">Liderar también se diseña.</div>
+              <div class="meta">FIRA SANS 900 · HOOK / MANTRA</div>
+            </div>
+            <div class="type-row">
+              <div class="sample" style="font-weight:400;font-size:18px">De diseñar soluciones a diseñar condiciones.</div>
+              <div class="meta">FIRA SANS 400 · CUERPO</div>
+            </div>
+            <div class="type-row">
+              <div class="sample mono" style="font-size:16px;font-weight:700">+800K · 01/05 · KPI</div>
+              <div class="meta">JETBRAINS MONO 700 · META / NÚMEROS (≥16px floor)</div>
+            </div>
+            <p class="mono muted" style="font-size:16px;margin-top:12px">Floor Studio + canvas: body/labels/meta ≥16px. IG 1080: títulos ~56–72 · cuerpo ≥28. Sin tipo ilegible en chrome UI.</p>
+          </div>
+
+          <div class="bib-card">
+            <h3>Do / Don’t · social &amp; voz</h3>
+            <div class="do-grid">
+              <div class="do-box yes">
+                <strong>Sí</strong>
+                Tipo grande en IG (títulos 56–72, body ≥28) · floor 16px en UI/meta · una palabra acento · pills/underlines rojos OK · yapping hablado LATAM · light wash detrás de ilustración · soft CTA (underline, sin caja)
+              </div>
+              <div class="do-box no">
+                <strong>No</strong>
+                Cajas CTA sólidas rojas · barra vertical roja izq. · monograma-cuadro en gradient · plates negros sólidos para illos · couplets cortos punchy · hooks de moda · clonar UserFirst
+              </div>
+            </div>
+            <div class="note-live">
+              <strong>Nota live site:</strong> design-leaders.co aún lidera con “Co-diseñemos tu yo del futuro” (mentoría). El brand book / esta Studio es la <em>nueva dirección</em> — plataforma de liderazgo práctico, no réplica de la home actual.
+            </div>
+          </div>
+
+          <div class="bib-card" style="grid-column:1/-1">
+            <h3>Copy esencial (narrativa)</h3>
+            <ul>
+              <li><strong>Hero:</strong> Liderar también se diseña.</li>
+              <li><strong>Subhero:</strong> Plataforma de liderazgo práctico para diseñadores de producto y experiencia en LATAM.</li>
+              <li><strong>Línea:</strong> La práctica detrás del siguiente nivel.</li>
+              <li><strong>Cierre:</strong> Tu siguiente nivel no comienza con otro título. Comienza con otra forma de trabajar.</li>
+              <li><strong>CTA suave:</strong> Entrar a la práctica · Explorar playbooks — sin caja roja; underline o invitación hablada</li>
+              <li><strong>Yapping:</strong> Cuerpo fluido, hablado, español LATAM — no couplets de dos líneas. Explica el shift, paga el “nosotros”, cierra con invitación concreta.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- DISCURSO -->
+      <section class="view" id="view-discurso">
+        <h1 class="hero-line" style="font-size:1.8rem">Discurso</h1>
+        <p class="hero-sub">Generador offline: mantra, shift y posicionamiento en yapping hablado (párrafos fluidos, no couplets). Voz CPD v2 · CTA suave sin caja roja.</p>
+        <div class="disc-form">
+          <div class="field">
+            <label>Tema</label>
+            <input id="dTema" placeholder="ej. ownership, condiciones, influencia"/>
+          </div>
+          <div class="field">
+            <label>Audiencia</label>
+            <select id="dAud">
+              <option value="designers">Designers de producto / UX</option>
+              <option value="leads">Leads / managers de diseño</option>
+              <option value="heads">Heads / directors</option>
+              <option value="product">Product ↔ Design</option>
+            </select>
+          </div>
+          <div class="field full">
+            <label>Insight / caso</label>
+            <textarea id="dInsight" placeholder="Qué viste en el último ciclo…"></textarea>
+          </div>
+          <div class="field full">
+            <label>Mensaje núcleo</label>
+            <select id="dMsg">
+              <option value="condiciones">Diseñar condiciones (no solo soluciones)</option>
+              <option value="leadership">Liderazgo práctico LATAM</option>
+              <option value="capa">Extensión UF · Personas / Equipos / Influencia</option>
+              <option value="practica">Entrar a la práctica (conocimiento · práctica · acompañamiento)</option>
+            </select>
+          </div>
+          <div class="full">
+            <button type="button" class="tbtn primary" id="btnGenDisc">Generar discurso</button>
+          </div>
+        </div>
+        <div class="disc-out" id="discOut"></div>
+        <div class="say-grid">
+          <div class="do-box yes">
+            <strong>Sí decimos</strong>
+            Liderar también se diseña · condiciones · práctica · LATAM · misma filosofía otra capa · evidencia / caso
+          </div>
+          <div class="do-box no">
+            <strong>No decimos</strong>
+            “Co-diseñemos tu yo del futuro” como hero de marca nueva · coaching aspiracional vacío · clonar slogans UF · yapping forzado
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+</div>
+<div class="toast" id="toast"></div>
+</body>
+</html>

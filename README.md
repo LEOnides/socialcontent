@@ -70,14 +70,7 @@ URL: `https://leonides.github.io/socialcontent/`.
 
 El build que tiene que servir esa URL está en [`docs/`](docs/) (`docs/index.html` y los assets del `npm run build`). `apps/brand-studio/dist/` no se commitea. `docs/.nojekyll` evita que Jekyll oculte assets cuyo nombre empieza con `_`.
 
-Pages ya está activo con **Deploy from a branch**, rama `main`, carpeta **`/` (root)**. En la raíz del repo no hay `index.html`, así que el sitio muestra este `README.md` y no el Studio. La API de Pages respondió 403 al intentar cambiar el origen a GitHub Actions, así que el origen tiene que quedar en la rama, carpeta `/docs`:
-
-1. Abrí https://github.com/LEOnides/socialcontent/settings/pages
-2. **Build and deployment → Source: Deploy from a branch**
-3. Branch: **main** · Folder: **/docs**
-4. **Save**
-
-Cuando ese build termine, el HTML de `https://leonides.github.io/socialcontent/` lleva el título **Design Leaders · Brand Studio · Woven Systems**.
+Pages está en **Deploy from a branch**, rama `main`, carpeta **`/` (root)**. La API de Pages responde 403 (`pages=write` y `administration=write`) al intentar pasar la carpeta a `/docs` o el origen a GitHub Actions, así que la misma copia del build también vive en la raíz del repo (`index.html`, `assets/`, `fonts/`, `vendor/` y `.nojekyll`). Con la carpeta `/`, `https://leonides.github.io/socialcontent/` sirve ese `index.html` (título **Design Leaders · Brand Studio · Woven Systems**, CSS `./assets/...`). `docs/` queda igual, por si más adelante la carpeta de Pages pasa a `/docs`.
 
 Si más adelante se puede usar **Source: GitHub Actions**, el workflow [`.github/workflows/brand-studio-pages.yml`](.github/workflows/brand-studio-pages.yml) publica solo `apps/brand-studio/dist` y no hace falta la copia en `docs/`. Hoy ese cambio de origen no está disponible desde la integración.
 
