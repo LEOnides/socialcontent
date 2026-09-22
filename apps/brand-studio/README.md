@@ -108,7 +108,7 @@ En dev y en `dist/` se sirven como:
 - UI en Fira Sans, piso **≥ 16px**.
 - Acento `#FF0033` · charcoal `#0D0F10` · cream `#F7F4EF`.
 - Mark Woven **sin** recuadro gradient. En nav, mark white-sm (D y L separadas), nunca el gradient.
-- Rail de navegación **~140px**, labels Fira en sentence case. No volver a un rail de 88px con mono en mayúsculas: los labels se cortan.
+- Rail de navegación **~140px** desde 900px de ancho, labels Fira en sentence case. Debajo de eso la nav es una barra horizontal de íconos (el nombre sigue en el botón para el lector de pantalla). No volver a un rail de 88px con mono en mayúsculas.
 - Español LATAM. Sin métricas inventadas. Sin chrome de UserFirst (no caja CTA roja sólida en las piezas).
 
 Detalle: `CONTEXT.md` y `Brand.md`.

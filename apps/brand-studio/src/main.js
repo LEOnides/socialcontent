@@ -151,6 +151,7 @@
     view: "plantillas",
     tpl: null,
     zoom: 0.42,
+    zoomLocked: false,
     fontScale: 1,
     pieceTheme: "dark",
     fields: {}
@@ -309,19 +310,35 @@
     if (name === "editor") syncEditorMode();
   }
 
+  function preferredZoom(t) {
+    if (t.layout === "deck") return 0.32;
+    if (t.layout === "story") return 0.28;
+    if (t.layout === "letter") return 0.48;
+    return 0.42;
+  }
+
+  function defaultZoom(t) {
+    var preferred = preferredZoom(t);
+    var wrap = document.querySelector(".canvas-wrap");
+    var avail = wrap && wrap.clientWidth > 80 ? wrap.clientWidth - 32 : window.innerWidth - 48;
+    var fit = avail / t.w;
+    return Math.max(0.12, Math.min(preferred, Math.round(fit * 100) / 100));
+  }
+
   function openTemplate(id) {
     var t = TEMPLATES.find(function (x) { return x.id === id; });
     if (!t) return;
     state.tpl = t;
     state.fields = Object.assign({}, t.defaults);
     state.pieceTheme = t.theme;
-    state.zoom = t.layout === "deck" ? 0.32 : t.layout === "story" ? 0.28 : t.layout === "letter" ? 0.48 : 0.42;
+    state.zoomLocked = false;
     $("edTitle").textContent = t.name;
+    setView("editor");
+    state.zoom = defaultZoom(t);
     buildFields();
     renderCanvas();
     runValidator();
     updateZoomLabel();
-    setView("editor");
   }
 
   function fieldDefs(t) {
@@ -643,10 +660,12 @@
   $("btnBack").addEventListener("click", function () { setView("plantillas"); });
   $("btnEmptyPick").addEventListener("click", function () { setView("plantillas"); });
   $("btnZoomIn").addEventListener("click", function () {
+    state.zoomLocked = true;
     state.zoom = Math.min(1, state.zoom + 0.05); updateZoomLabel(); renderCanvas();
   });
   $("btnZoomOut").addEventListener("click", function () {
-    state.zoom = Math.max(0.15, state.zoom - 0.05); updateZoomLabel(); renderCanvas();
+    state.zoomLocked = true;
+    state.zoom = Math.max(0.12, state.zoom - 0.05); updateZoomLabel(); renderCanvas();
   });
   $("btnFontUp").addEventListener("click", function () {
     state.fontScale = Math.min(1.4, state.fontScale + 0.05); renderCanvas();
@@ -671,6 +690,19 @@
   });
   $("btnPng").addEventListener("click", exportPng);
   $("btnGenDisc").addEventListener("click", genDiscurso);
+
+  var resizeTimer;
+  window.addEventListener("resize", function () {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(function () {
+      if (!state.tpl || state.zoomLocked || state.view !== "editor") return;
+      var next = defaultZoom(state.tpl);
+      if (Math.abs(next - state.zoom) < 0.01) return;
+      state.zoom = next;
+      updateZoomLabel();
+      renderCanvas();
+    }, 120);
+  });
 
   renderGallery();
   renderSwatches();
