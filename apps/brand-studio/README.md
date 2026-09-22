@@ -6,6 +6,8 @@ Vistas: **Plantillas · Editor · Biblioteca · Discurso**.
 
 Sin backend. Fuentes locales y `html2canvas` vendoreado (no hay Google Fonts ni CDN).
 
+El siguiente incremento (cuentas, base de datos y guardar imágenes en el espacio) está en [`PLANNING.md`](PLANNING.md). Todavía no está construido.
+
 ## Requisitos
 
 - Node.js 18+ y npm
@@ -67,6 +69,7 @@ apps/brand-studio/
   CONTEXT.md                 # narrativa y reglas (referencia)
   Brand.md                   # índice de marca
   USABILITY-NOTES.md         # pass 2026-09-21
+  PLANNING.md                # siguiente incremento (no construido)
 ```
 
 Los PNG de logo e ilustración coinciden con el set canónico (marks oficiales + refs de illo). El light whiteboard (`sketchnote-light-compliance-ux.jpg`) queda en el repo como archivo histórico: no se usa para trabajo nuevo.
