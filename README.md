@@ -12,8 +12,10 @@ Repositorio de trabajo para el contenido social: guiones, posts, carruseles y el
 ├── drafts/            # piezas en proceso
 ├── publicado/         # piezas ya publicadas, con fecha y canal
 ├── assets/            # imágenes, portadas, recursos gráficos ligeros
-└── docs/              # voz y tono, guías de marca, plantillas
+└── guias/             # voz y tono, guías de marca, plantillas
 ```
+
+`docs/` no es para borradores: es el sitio estático publicado del Brand Studio (`docs/index.html`).
 
 ## Convenciones
 
@@ -64,9 +66,34 @@ npm run preview   # sirve dist/
 
 Cómo agregar una plantilla o un asset, y las reglas de marca que no se tocan: [`apps/brand-studio/README.md`](apps/brand-studio/README.md).
 
-URL prevista: `https://leonides.github.io/socialcontent/`. Hoy responde 404. El workflow publica solo el `dist/` del Studio. Para dejarlo público: marcar el PR como listo, mergear a `main` y, en **Settings → Pages**, elegir **Source: GitHub Actions**. En GitHub Pro el sitio puede ser público con el repo privado. En GitHub Free hay que pasar el repo a público en **Settings → General → Danger Zone → Change repository visibility**; eso publica también el código (borradores). El detalle está en [`apps/brand-studio/README.md`](apps/brand-studio/README.md).
+URL: `https://leonides.github.io/socialcontent/`.
+
+El build que tiene que servir esa URL está en [`docs/`](docs/) (`docs/index.html` y los assets del `npm run build`). `apps/brand-studio/dist/` no se commitea. `docs/.nojekyll` evita que Jekyll oculte assets cuyo nombre empieza con `_`.
+
+Pages ya está activo con **Deploy from a branch**, rama `main`, carpeta **`/` (root)**. En la raíz del repo no hay `index.html`, así que el sitio muestra este `README.md` y no el Studio. La API de Pages respondió 403 al intentar cambiar el origen a GitHub Actions, así que el origen tiene que quedar en la rama, carpeta `/docs`:
+
+1. Abrí https://github.com/LEOnides/socialcontent/settings/pages
+2. **Build and deployment → Source: Deploy from a branch**
+3. Branch: **main** · Folder: **/docs**
+4. **Save**
+
+Cuando ese build termine, el HTML de `https://leonides.github.io/socialcontent/` lleva el título **Design Leaders · Brand Studio · Woven Systems**.
+
+Si más adelante se puede usar **Source: GitHub Actions**, el workflow [`.github/workflows/brand-studio-pages.yml`](.github/workflows/brand-studio-pages.yml) publica solo `apps/brand-studio/dist` y no hace falta la copia en `docs/`. Hoy ese cambio de origen no está disponible desde la integración.
+
+Para regenerar `docs/` después de un cambio en el Studio:
+
+```bash
+cd apps/brand-studio
+npm run build
+cd ../..
+rm -rf docs
+mkdir docs
+cp -a apps/brand-studio/dist/. docs/
+touch docs/.nojekyll
+```
 
 ## Notas
 
-- El repo sigue **privado** hasta que se cambie la visibilidad a mano. Aquí van borradores y notas de trabajo, no material final para terceros.
+- El repo es **público**. `docs/` es el sitio: no pongas borradores editoriales ahí.
 - Los archivos pesados (video en bruto, exports grandes) no van al repo — se quedan en almacenamiento externo y aquí solo se referencian por enlace.

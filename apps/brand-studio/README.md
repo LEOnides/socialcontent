@@ -31,7 +31,7 @@ npm run preview
 
 `npm run build` escribe `apps/brand-studio/dist/`. Ese folder se puede subir a cualquier hosting estático (raíz o subpath): las URLs del build son relativas (`base: './'`).
 
-`dist/` y `node_modules/` no se commitean.
+`dist/` y `node_modules/` no se commitean. La copia que ve GitHub está en `docs/` en la raíz del repo (incluye `docs/.nojekyll`).
 
 ## URL pública (GitHub Pages)
 
@@ -39,15 +39,18 @@ El sitio queda en:
 
 `https://leonides.github.io/socialcontent/`
 
-Hoy **no está en línea**: esa URL responde HTTP 404 y el repo sigue privado. El workflow publica solo `apps/brand-studio/dist`. Los borradores editoriales no entran a ese artifact.
+El repo ya es público y Pages ya está activo, pero el origen es **Deploy from a branch → `main` / `/` (root)**. Ahí no hay `index.html`: se publica el README de la raíz, no el Studio. El build commiteado está en `docs/index.html`.
 
-El token de la integración no puede cambiar la visibilidad ni activar Pages (la API responde 403). Hacen falta estos clics, en este orden:
+La API para cambiar Pages respondió 403. Hace falta este clic:
 
-1. El PR está en borrador. En https://github.com/LEOnides/socialcontent/pull/1, **Ready for review** y después **Merge pull request** hacia `main`. El workflow solo corre con un push a `main`.
-2. Camino que deja el código privado y el sitio público, si la cuenta es GitHub Pro o superior: **Settings → Pages → Build and deployment → Source: GitHub Actions**. En ese plan, un sitio publicado desde un repo privado es público en internet. Si aparece **GitHub Pages visibility**, elegí **Public**.
-3. Si Pages dice que el repositorio tiene que ser público (GitHub Free): el **código fuente** también queda público, borradores incluidos. **Settings → General → Danger Zone → Change repository visibility → Public**, confirmá el nombre del repo, **I have read and understand these effects** y **Make this repository public**. Después el paso 2.
-4. Si el workflow no arrancó solo: **Actions → Brand Studio Pages → Run workflow**, rama `main`.
-5. Cuando el job `deploy` termina, abrí `https://leonides.github.io/socialcontent/`.
+1. Abrí https://github.com/LEOnides/socialcontent/settings/pages
+2. **Build and deployment → Source: Deploy from a branch**
+3. Branch: **main** · Folder: **/docs**
+4. **Save**
+
+Cuando el build de Pages termine, el título de la página es **Design Leaders · Brand Studio · Woven Systems**.
+
+Alternativa (no deja el build en git): en la misma pantalla, **Source: GitHub Actions**. El workflow publica solo `apps/brand-studio/dist`. Ese cambio de origen tampoco se pudo hacer por API.
 
 ## Qué está versionado
 

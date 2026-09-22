@@ -1,5 +1,7 @@
 # Publica solo apps/brand-studio/dist en GitHub Pages.
 # El resto del repo (borradores editoriales) no entra al sitio.
+# Solo corre de verdad cuando Pages → Source es GitHub Actions.
+# Mientras el origen sea la rama main, el sitio público es docs/ (carpeta /docs).
 name: Brand Studio Pages
 
 on:
