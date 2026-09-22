@@ -66,7 +66,9 @@ npm run preview   # sirve dist/
 
 Cómo agregar una plantilla o un asset, y las reglas de marca que no se tocan: [`apps/brand-studio/README.md`](apps/brand-studio/README.md).
 
-URL: `https://leonides.github.io/socialcontent/`.
+URL exacta: `https://leonides.github.io/socialcontent/`
+
+Si el browser muestra **File not found** de GitHub Pages, la ruta no es esa. Cualquier otra ruta del sitio redirige al Studio (`404.html`).
 
 El build que tiene que servir esa URL está en [`docs/`](docs/) (`docs/index.html` y los assets del `npm run build`). `apps/brand-studio/dist/` no se commitea. `docs/.nojekyll` evita que Jekyll oculte assets cuyo nombre empieza con `_`.
 
