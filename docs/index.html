@@ -6,8 +6,8 @@
 <title>Design Leaders · Brand Studio · Woven Systems</title>
 <link rel="icon" href="./favicon.png" type="image/png"/>
 <script src="./vendor/html2canvas.min.js" defer></script>
-  <script type="module" crossorigin src="./assets/index-CXO1Te37.js"></script>
-  <link rel="stylesheet" crossorigin href="./assets/index-DQ-gX9as.css">
+  <script type="module" crossorigin src="./assets/index-CVyTsso4.js"></script>
+  <link rel="stylesheet" crossorigin href="./assets/index-BMALulG8.css">
 </head>
 <body>
 <div class="app">
@@ -99,6 +99,17 @@
             </div>
           </div>
           <aside class="panel">
+            <h3>Fondo</h3>
+            <div class="field bg-field">
+              <label class="bg-label" for="bgFile">Imagen de fondo</label>
+              <div class="bg-actions">
+                <label class="tbtn" for="bgFile">Subir imagen</label>
+                <button type="button" class="tbtn" id="btnClearBg" hidden>Quitar</button>
+              </div>
+              <input type="file" id="bgFile" accept="image/*" hidden>
+              <p class="bg-note">Multiply con el color del tema. En charcoal la foto queda casi negra; en Woven o field rojo se tiñe.</p>
+              <p class="bg-name" id="bgName" hidden></p>
+            </div>
             <h3>Campos</h3>
             <div id="fields"></div>
             <h3 style="margin-top:18px">Validador</h3>
