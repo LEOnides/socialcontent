@@ -154,7 +154,12 @@
     zoomLocked: false,
     fontScale: 1,
     pieceTheme: "dark",
-    fields: {}
+    fields: {},
+    bgImage: null,
+    bgUrl: "",
+    bgName: "",
+    bgComposed: "",
+    bgComposeKey: ""
   };
 
   var crumbs = { plantillas: "PLANTILLAS", editor: "EDITOR", biblioteca: "BIBLIOTECA", discurso: "DISCURSO" };
@@ -391,6 +396,129 @@
     });
   }
 
+  function syncBgUi() {
+    var clearBtn = $("btnClearBg");
+    var name = $("bgName");
+    if (clearBtn) clearBtn.hidden = !state.bgImage;
+    if (name) {
+      name.hidden = !state.bgName;
+      name.textContent = state.bgName || "";
+    }
+  }
+
+  function cssAngleGradient(ctx, w, h, angleDeg, stops) {
+    var angle = ((angleDeg % 360) * Math.PI) / 180;
+    var dx = Math.sin(angle);
+    var dy = -Math.cos(angle);
+    var cx = w / 2;
+    var cy = h / 2;
+    var half = (Math.abs(w * dx) + Math.abs(h * dy)) / 2;
+    var g = ctx.createLinearGradient(cx - dx * half, cy - dy * half, cx + dx * half, cy + dy * half);
+    stops.forEach(function (stop) { g.addColorStop(stop[0], stop[1]); });
+    return g;
+  }
+
+  function readThemePaint(frame) {
+    var cs = getComputedStyle(frame);
+    var image = cs.backgroundImage || "";
+    if (image.indexOf("linear-gradient") !== -1) {
+      var angleMatch = image.match(/linear-gradient\(\s*([\d.]+)deg/);
+      var stops = [];
+      var re = /(rgba?\([^)]+\))\s+([\d.]+)%/g;
+      var m;
+      while ((m = re.exec(image))) stops.push([parseFloat(m[2]) / 100, m[1]]);
+      if (angleMatch && stops.length >= 2) {
+        return { type: "gradient", angle: parseFloat(angleMatch[1]), stops: stops };
+      }
+    }
+    return { type: "solid", color: cs.backgroundColor || "#0D0F10" };
+  }
+
+  function drawCover(ctx, img, w, h) {
+    var iw = img.naturalWidth || img.width;
+    var ih = img.naturalHeight || img.height;
+    if (!iw || !ih) return;
+    var scale = Math.max(w / iw, h / ih);
+    var dw = iw * scale;
+    var dh = ih * scale;
+    ctx.drawImage(img, (w - dw) / 2, (h - dh) / 2, dw, dh);
+  }
+
+  /* Bake color × photo so preview and PNG match. html2canvas drops mix-blend-mode. */
+  function composeMultiply(frame, img, w, h, theme) {
+    var key = theme + "|" + w + "|" + h + "|" + (state.bgUrl || "");
+    if (key === state.bgComposeKey && state.bgComposed) return state.bgComposed;
+    var canvas = document.createElement("canvas");
+    canvas.width = w;
+    canvas.height = h;
+    var ctx = canvas.getContext("2d");
+    var paint = readThemePaint(frame);
+    if (paint.type === "gradient") ctx.fillStyle = cssAngleGradient(ctx, w, h, paint.angle, paint.stops);
+    else ctx.fillStyle = paint.color;
+    ctx.fillRect(0, 0, w, h);
+    ctx.globalCompositeOperation = "multiply";
+    drawCover(ctx, img, w, h);
+    state.bgComposed = canvas.toDataURL("image/png");
+    state.bgComposeKey = key;
+    return state.bgComposed;
+  }
+
+  function applyBackground(frame) {
+    var layer = frame.querySelector(".bg-multiply");
+    if (!state.bgImage || !state.tpl) {
+      frame.classList.remove("has-bg");
+      if (layer) layer.remove();
+      return;
+    }
+    var url = composeMultiply(frame, state.bgImage, state.tpl.w, state.tpl.h, state.pieceTheme);
+    frame.classList.add("has-bg");
+    if (!layer) {
+      layer = document.createElement("img");
+      layer.className = "bg-multiply";
+      layer.alt = "";
+      frame.insertBefore(layer, frame.firstChild);
+    }
+    if (layer.getAttribute("src") !== url) layer.src = url;
+  }
+
+  function clearBackground() {
+    if (state.bgUrl) URL.revokeObjectURL(state.bgUrl);
+    state.bgImage = null;
+    state.bgUrl = "";
+    state.bgName = "";
+    state.bgComposed = "";
+    state.bgComposeKey = "";
+    var input = $("bgFile");
+    if (input) input.value = "";
+    syncBgUi();
+    if (state.tpl) renderCanvas();
+  }
+
+  function onBackgroundFile(file) {
+    if (!file || String(file.type || "").indexOf("image/") !== 0) {
+      toast("Elegí un archivo de imagen.");
+      return;
+    }
+    if (state.bgUrl) URL.revokeObjectURL(state.bgUrl);
+    var url = URL.createObjectURL(file);
+    var img = new Image();
+    img.onload = function () {
+      state.bgImage = img;
+      state.bgUrl = url;
+      state.bgName = file.name || "imagen";
+      state.bgComposed = "";
+      state.bgComposeKey = "";
+      syncBgUi();
+      if (state.tpl) renderCanvas();
+      toast("Fondo en multiply con el color del tema");
+    };
+    img.onerror = function () {
+      URL.revokeObjectURL(url);
+      toast("No se pudo leer la imagen.");
+    };
+    img.src = url;
+  }
+
   function footerHtml(f) {
     var series = f.series ? '<div style="opacity:.7;margin-bottom:4px">' + escapeHtml(f.series) + "</div>" : "";
     return series + "<div>" + escapeHtml(f.foot || "") + "</div>";
@@ -478,8 +606,11 @@
       var refSrc = (t.ref && ILLO_REFS[t.ref]) ? ILLO_REFS[t.ref] : "";
       var lightOverlay = (state.pieceTheme === "sketchnote-light" || t.theme === "sketchnote-light" || t.ref === "sketchnote-light");
       var markTheme = state.pieceTheme || t.theme;
+      var refHtml = state.bgImage
+        ? ""
+        : (refSrc ? '<img class="ref" src="' + refSrc + '" alt="Sketchnote DL"/>' : '<div class="art-zone">Sketchnote DL</div>');
       html = '<div class="p-inner p-illo-ref' + (lightOverlay ? " light" : "") + '">' +
-        (refSrc ? '<img class="ref" src="' + refSrc + '" alt="Sketchnote DL"/>' : '<div class="art-zone">Sketchnote DL</div>') +
+        refHtml +
         markHtml({ theme: markTheme }) +
         '<div class="overlay">' +
         '<div class="mode-tag">' + escapeHtml(f.label || t.name || "Sketchnote DL") + "</div>" +
@@ -497,6 +628,7 @@
     }
 
     inner.innerHTML = html;
+    applyBackground(frame);
     bindContentEdit();
   }
 
@@ -673,6 +805,11 @@
   $("btnFontDown").addEventListener("click", function () {
     state.fontScale = Math.max(0.75, state.fontScale - 0.05); renderCanvas();
   });
+  $("bgFile").addEventListener("change", function () {
+    var file = $("bgFile").files && $("bgFile").files[0];
+    if (file) onBackgroundFile(file);
+  });
+  $("btnClearBg").addEventListener("click", clearBackground);
   $("btnPieceTheme").addEventListener("click", function () {
     var order = ["dark", "woven", "light", "wash-lavender", "wash-mist", "wash-violet", "wash-coral", "field-rojo"];
     var i = order.indexOf(state.pieceTheme);

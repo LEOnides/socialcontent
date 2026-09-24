@@ -163,6 +163,19 @@ img.mark{display:block;object-fit:contain}
   transform-origin:top left;background:#0D0F10;color:#F7F4EF;
   box-shadow:0 12px 40px rgba(0,0,0,.35);position:relative;overflow:hidden;
 }
+#canvasInner{position:relative;z-index:1;width:100%;height:100%}
+.bg-multiply{
+  position:absolute;inset:0;width:100%;height:100%;object-fit:fill;
+  pointer-events:none;z-index:0;
+}
+.canvas-frame.has-bg .p-deck,
+.canvas-frame.has-bg[data-piece="dark"] .p-deck,
+.canvas-frame.has-bg .p-metric .left{background:transparent}
+.bg-field{padding-bottom:4px;margin-bottom:16px;border-bottom:1px solid var(--grid)}
+.bg-actions{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.bg-note{margin:8px 0 0;color:var(--muted);font-size:var(--type-floor);line-height:1.4}
+.bg-name{margin:8px 0 0;font-family:var(--mono);font-size:var(--type-floor);word-break:break-word}
+.bg-label{display:block;font-family:var(--mono);font-size:var(--type-floor);letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-bottom:4px}
 .canvas-frame[data-piece="light"]{background:#F7F4EF;color:#141414}
 .canvas-frame[data-piece="woven"]{background:var(--woven);color:#F7F4EF}
 .canvas-frame[data-piece="wash"],.canvas-frame[data-piece="wash-lavender"]{background:var(--wash-lavender);color:#141414}
